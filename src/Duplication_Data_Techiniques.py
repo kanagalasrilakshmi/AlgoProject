@@ -256,7 +256,7 @@ def main():
     # # Concatenate individual DataFrames into a single DataFrame
     # results_df = pd.concat(dfs, ignore_index=True)
     # results_df = results_df.rename(columns={0: 'Execution Time', 1: 'Memory Usage'})
-    dfsorting.to_csv('sorting_results.csv', index=False)
+    dfsorting.to_csv('sorting_results_duplication.csv', index=False)
     
 
 if __name__ == "__main__":
