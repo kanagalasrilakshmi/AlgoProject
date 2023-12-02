@@ -3,28 +3,30 @@ import time
 import psutil
 import numpy as np
 import warnings
+
 warnings.filterwarnings("ignore")
 np.random.seed(123)
 
+
 # Function to measure time and memory usage
 def measure_sorting_performance(algorithm, df):
-    
     start_time = time.time()
     start_memory = psutil.Process().memory_info().rss / 1024  # in kilobytes
-    
+
     algorithm(df)
-    
+
     end_time = time.time()
     end_memory = psutil.Process().memory_info().rss / 1024  # in kilobytes
-    
+
     # Calculate time and memory usage
     execution_time = end_time - start_time
     memory_usage = abs(end_memory - start_memory)
 
     # Output results
-     #print(f"Execution Time: {execution_time} seconds")
-     #print(f"Memory Usage: {memory_usage} KB\n")
+    # print(f"Execution Time: {execution_time} seconds")
+    # print(f"Memory Usage: {memory_usage} KB\n")
     return execution_time, memory_usage
+
 
 # Merge Sort implementation for sorting DataFrame by rows
 def merge_sort(df):
@@ -39,6 +41,7 @@ def merge_sort(df):
     right = merge_sort(right)
 
     return merge(left, right)
+
 
 def merge(left, right):
     result = pd.DataFrame()
@@ -63,6 +66,7 @@ def merge(left, right):
 
     return result
 
+
 def quick_sort(df):
     if len(df) <= 1:
         return df
@@ -74,6 +78,7 @@ def quick_sort(df):
     right = df[df.iloc[:, 0] > pivot]
 
     return pd.concat([quick_sort(left), middle, quick_sort(right)], ignore_index=True)
+
 
 def bubble_sort(df):
     n = len(df)
@@ -91,6 +96,7 @@ def bubble_sort(df):
 
     return df
 
+
 def count_sort(df):
     counting_array = [0] * 11
 
@@ -104,10 +110,13 @@ def count_sort(df):
 
     return sorted_df
 
-def main():
-    df = pd.read_csv('data.csv')
 
-    algorithms = {'Merge Sort': merge_sort, 'Quick Sort': quick_sort, 'Bubble Sort': bubble_sort, 'Count Sort': count_sort}
+def main():
+    df = pd.read_csv('../data/data.csv')
+
+    print("Successfully read the data")
+    algorithms = {'Merge Sort': merge_sort, 'Quick Sort': quick_sort, 'Bubble Sort': bubble_sort,
+                  'Count Sort': count_sort}
     data_size = {100000: df, 10000: df.head(10000), 1000: df.head(1000), 100: df.head(100)}
 
     # List to store individual DataFrames
@@ -118,6 +127,7 @@ def main():
         # Loop through data sizes
         for size, fraction in data_size.items():
             result = measure_sorting_performance(algorithm_func, fraction)
+            print(f"Algorithm: {algorithm_name}, dataset size: {size}, time: {result[0]}")
             df_result = pd.DataFrame(result).T
             df_result['Algorithm'] = algorithm_name
             df_result['Data Size'] = size
@@ -126,7 +136,8 @@ def main():
     # Concatenate individual DataFrames into a single DataFrame
     results_df = pd.concat(dfs, ignore_index=True)
     results_df = results_df.rename(columns={0: 'Execution Time', 1: 'Memory Usage'})
-    results_df.to_csv('sorting_results.csv', index=False)
+    results_df.to_csv('../results/sorting_results.csv', index=False)
+
 
 if __name__ == "__main__":
     main()
