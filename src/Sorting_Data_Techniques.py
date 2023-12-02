@@ -1,8 +1,8 @@
-import pandas as pd
+import warnings
 import time
 import psutil
+import pandas as pd
 import numpy as np
-import warnings
 
 warnings.filterwarnings("ignore")
 np.random.seed(123)
