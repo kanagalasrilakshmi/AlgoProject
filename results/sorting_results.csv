@@ -1,0 +1,17 @@
+Execution Time,Memory Usage,Algorithm,Data Size
+3049.399078,13932,Merge Sort,100000
+62.976996,7856,Merge Sort,10000
+3.213033,3372,Merge Sort,1000
+0.219996,260,Merge Sort,100
+2439.777268,9128,Quick Sort,100000
+40.011593,616,Quick Sort,10000
+1.199837,8,Quick Sort,1000
+0.089993,0,Quick Sort,100
+15832.13982,912,Bubble Sort,100000
+4837.759274,616,Bubble Sort,10000
+127.514411,80,Bubble Sort,1000
+1.141031,0,Bubble Sort,100
+0.367017,1,Count Sort,100000
+0.046999,1,Count Sort,10000
+0.008983,0,Count Sort,1000
+0.005965,0,Count Sort,100
